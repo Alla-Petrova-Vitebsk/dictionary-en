@@ -8,31 +8,34 @@ export default class GetData {
   }
 
   setWords() {
-    console.log(this.words);
-    const partwords = this.words.filter((item, id) => id < 10);
-    console.log(partwords)
-    partwords.forEach((item) => console.log(item.word));
+    // console.log(this.words);
+    // const partwords = this.words.filter((item, id) => id < 10);
+    // console.log(partwords)
+    // partwords.forEach((item) => console.log(item.word));
   }
 
   findWord() {
     const seachInput = document.getElementById('word-seach');
     seachInput.oninput = () => {
-      let words = this.getWords(seachInput.value);
+    if (seachInput.value){
+    let  words = this.getWords(seachInput.value);
       console.log(words);
       this.showWord(words);
+    } 
     }
   }
 
   getWords(query) {
     return this.words.filter((item) =>
-      item.word.toLowerCase().indexOf(query.toLowerCase()) == 0);
+      item.word.toLowerCase().indexOf(query.toLowerCase()) === 0);
   }
 
   showWord(words) {
     const wordsElement = document.getElementById('words');
+    wordsElement.innerHTML='';
     const wordsDiv = document.createElement('div'); 
+    wordsDiv.className = 'words';
     wordsElement.append(wordsDiv);
-
     words.forEach((item) => {
       let element = document.createElement('div');
       element.textContent = `${item.word}`;
