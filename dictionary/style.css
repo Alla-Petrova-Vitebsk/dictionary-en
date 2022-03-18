@@ -39,7 +39,7 @@ justify-content: space-between;
 }
 .main {
  min-height: calc(100vh - 100px);
- background:#d4ffeb;
+ background:#d7f5e7;
 }
 
 .element-style {
@@ -64,3 +64,32 @@ justify-content: space-between;
 #word-seach::-webkit-input-placeholder{
 color: #ccc;
 }
+
+.words{
+  margin: 20px;
+}
+
+.words-div{
+display: flex;
+justify-content:flex-start;
+flex-wrap: wrap;
+}
+
+.word {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid cornflowerblue;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+ }
+
+.word:hover{
+  color:#bdae83;
+  transform: scale(1.2);
+}
+
+.word.active{
+  color:#bdae83;
+  }
+

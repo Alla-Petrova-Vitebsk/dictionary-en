@@ -3,25 +3,18 @@ import wordsDb from '../assets/words/words.json' assert {type: "json"};
 export default class GetData {
   constructor() {
     this.words = Object.values(wordsDb);
-    this.setWords();
     this.findWord();
-  }
-
-  setWords() {
-    // console.log(this.words);
-    // const partwords = this.words.filter((item, id) => id < 10);
-    // console.log(partwords)
-    // partwords.forEach((item) => console.log(item.word));
   }
 
   findWord() {
     const seachInput = document.getElementById('word-seach');
     seachInput.oninput = () => {
-    if (seachInput.value){
+    if (seachInput.value !== ''){
     let  words = this.getWords(seachInput.value);
-      console.log(words);
       this.showWord(words);
-    } 
+    } else {
+      this.showWord([]);
+    }
     }
   }
 
@@ -34,10 +27,11 @@ export default class GetData {
     const wordsElement = document.getElementById('words');
     wordsElement.innerHTML='';
     const wordsDiv = document.createElement('div'); 
-    wordsDiv.className = 'words';
+    wordsDiv.className = 'words-div'
     wordsElement.append(wordsDiv);
     words.forEach((item) => {
       let element = document.createElement('div');
+      element.className = 'word';
       element.textContent = `${item.word}`;
       wordsDiv.append(element);
     })
