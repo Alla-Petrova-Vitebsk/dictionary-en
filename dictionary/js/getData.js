@@ -1,4 +1,5 @@
 import wordsDb from '../assets/words/words.json' assert {type: "json"};
+import CardWord from './cardWord.js';
 
 export default class GetData {
   constructor() {
@@ -8,7 +9,6 @@ export default class GetData {
   }
 
   findWords() {
-    console.log(this.words)
     const seachInput = document.getElementById('word-seach');
     seachInput.oninput = () => {
       if (seachInput.value !== '') {
@@ -31,7 +31,6 @@ export default class GetData {
     const wordsDiv = document.createElement('div');
     wordsDiv.className = 'words-div';
     wordsElement.append(wordsDiv);
-    console.log(words);
     words.forEach((item) => {
       let element = document.createElement('div');
       element.className = 'word';
@@ -43,9 +42,8 @@ export default class GetData {
   showCardWord(event) {
     if (event.target.className === 'word') {
       let wordBtn = event.target.textContent;
-      console.log(wordBtn);
-     let word = this.getWords(wordBtn);
-     console.log(word);
+      let word = this.getWords(wordBtn);
+      let cardWord = new CardWord (word[0]);
     }
   }
 
@@ -53,6 +51,4 @@ export default class GetData {
     const wordsElement = document.getElementById('words');
     wordsElement.addEventListener('click',(event) => this.showCardWord(event));
   }
-
-
 }

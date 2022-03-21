@@ -10,11 +10,11 @@ export default class CardWord {
     <img src='assets/${word.image}' class="img-word">
   </div>
   <div>
-    <h3>${word.word}</h3>
-    <div>[${word.transcription}]</div>
+    <h2>${word.word}</h2>
+    <div>${word.transcription}</div>
     <div>${word.wordTranslate}</div>
     <audio src='assets/${word.audio}' controls></audio>
-    <div>${textExample}</div>
+    <div>${word.textExample}</div>
     <div>${word.textExampleTranslate}</div>
     <audio src='assets/${word.audioExample}' controls></audio>
   </div>

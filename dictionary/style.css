@@ -101,6 +101,7 @@ flex-wrap: wrap;
   border: 1px solid white;
   border-radius: 15px;
   box-shadow: 0px 5px 8px 2px rgb(0 0 0 / 20%);
+  transition: 0.3s;
 }
 
 .img-word{
