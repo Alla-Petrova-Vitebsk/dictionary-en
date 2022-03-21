@@ -21,14 +21,30 @@
       <input class="element-style" id="word-seach" type="search" name="text" required placeholder="Enter word"
         autocomplete="off" autofocus>
     </div>
-  <div class="nav"></div>
-  <div class="card-word"> </div>
-  <div class="words" id="words"></div> 
+    <div id="card-word"> 
+      <div class="card-word">
+        <div>
+          <img src='assets/files/01_0001.jpg' class="img-word">
+        </div>
+        <div>
+          <h3>word</h3>
+          <div>[transcription]</div>
+          <div>wordTranslate</div>
+          <audio src='assets/files/01_0001.mp3' controls></audio>
+          <div>textExample</div>
+          <div>textExampleTranslate</div>
+          <audio src='assets/files/01_0001_example.mp3' controls></audio>
+        </div>
+      </div>
+    </div>
+    
+    <div class="words" id="words"></div>
   </main>
   <footer class="footer">
     <div class="logo footer-logo"></div>
     <div class="footer-text">2022</div>
   </footer>
-  <script type ="module" src="index.js"></script>
+  <script type="module" src="index.js"></script>
 </body>
+
 </html>

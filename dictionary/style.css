@@ -85,11 +85,35 @@ flex-wrap: wrap;
  }
 
 .word:hover{
-  color:#bdae83;
+  background-color:#bdae83;
   transform: scale(1.2);
 }
 
 .word.active{
-  color:#bdae83;
+   background-color: #bdae83 ;
   }
+
+.card-word{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 10px;
+  background: linear-gradient(180deg, #ffffff54, #fca65f94);
+  border: 1px solid white;
+  border-radius: 15px;
+  box-shadow: 0px 5px 8px 2px rgb(0 0 0 / 20%);
+}
+
+.img-word{
+  width: 100%;
+  border-radius: 15px;
+  padding-top: 10px;
+}
+
+@media (max-width:600px){
+.card-word {
+  display: block;
+}
+
+}
+
 
