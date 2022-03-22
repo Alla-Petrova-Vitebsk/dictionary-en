@@ -21,6 +21,11 @@ export default class CardWord {
     <div>${word.textExampleTranslate}</div>
     <audio src='assets/${word.audioExample}' controls></audio>
     </div>
+    <div class="word-example">
+    <div>${word.textMeaning}</div>
+    <div>${word.textMeaningTranslate}</div>
+    <audio src='assets/${word.audioMeaning}' controls></audio>
+    </div>
   </div>
   `
   }
