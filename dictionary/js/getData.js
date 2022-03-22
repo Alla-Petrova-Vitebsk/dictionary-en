@@ -39,16 +39,25 @@ export default class GetData {
     })
   }
 
+  toggleActiveWord(event) {
+    let wordsBtn = document.querySelectorAll('.word');
+    wordsBtn.forEach((item) => {
+      item.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+
   showCardWord(event) {
-    if (event.target.className === 'word') {
+    if (event.target.classList.contains('word')) {
       let wordBtn = event.target.textContent;
       let word = this.getWords(wordBtn);
-      let cardWord = new CardWord (word[0]);
+      let cardWord = new CardWord(word[0]);
     }
+    this.toggleActiveWord(event);
   }
 
   showWord() {
     const wordsElement = document.getElementById('words');
-    wordsElement.addEventListener('click',(event) => this.showCardWord(event));
+    wordsElement.addEventListener('click', (event) => this.showCardWord(event));
   }
 }
