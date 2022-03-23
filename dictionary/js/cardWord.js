@@ -12,8 +12,8 @@ export default class CardWord {
   <div>
   <div class="word-translate">
     <h2>${word.word}</h2>
-    <div>${word.transcription}</div>
-    <div>${word.wordTranslate}</div>
+    <div class="transcription">${word.transcription}</div>
+    <div class="translate">${word.wordTranslate}</div>
     <audio src='assets/${word.audio}' controls></audio>
     </div>
     <div class="word-example">
