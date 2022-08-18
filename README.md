@@ -12,7 +12,7 @@ mongod --dbpath "d:\mongodb\data")
 ## 2 склонировать репозиторий и перейти в ветку dictionary-dip 
 ($ git clone git@github.com:Alla-Petrova-Vitebsk/dictionary-en.git -b dictionary-dip)
 
-Серверная часть (код реализован в каталоге server)
+# Серверная часть (код реализован в каталоге server)
 
 ## 3 Перейти в каталог server и установить зависимости
 (cd server
@@ -22,7 +22,7 @@ npm install)
 (npm start
 или npm run start:dev)
 
-Часть Frontend (код реализован в каталоге dictionary)
+# Часть Frontend (код реализован в каталоге dictionary)
 ## 5 создать новый терминал и перейти в каталог  dictionary
 (cd..
 cd dictionary)
