@@ -9,7 +9,8 @@
 или в cmd набрать команду
 mongod --dbpath "d:\mongodb\data")
 
-## 2 склонировать репозиторий и перейти в ветку dictionary-dip ($ git clone git@github.com:Alla-Petrova-Vitebsk/dictionary-en.git -b dictionary-dip)
+## 2 склонировать репозиторий и перейти в ветку dictionary-dip 
+($ git clone git@github.com:Alla-Petrova-Vitebsk/dictionary-en.git -b dictionary-dip)
 
 Серверная часть (код реализован в каталоге server)
 
