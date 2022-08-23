@@ -6,58 +6,103 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">  
+  <link rel="stylesheet" href="style.css">
   <title>Dictionary</title>
 </head>
 
 <body>
   <header>
     <div class="logo"></div>
-    <h1>Dictionary</h1>
-    <div class="language">
-      <p class="eng">
-          Eng
-      </p>
-  </div>
-  </header>
-  <main class="main">
-    <div class="contols-wrapper">
-      <input class="element-style" id="word-seach" type="search" name="text" required placeholder="Enter word"
-        autocomplete="off" autofocus>
+    <div class="title">
+      Англо-русский словарь
     </div>
-    <div id="card-word">
-      <div class="card-word">
-        <div>
-          <img src='../../server/files/05_0081.jpg' class="img-word">
-        </div>
-        <div>
-          <div class="word-translate">
-            <h2>active</h2>
-            <div class="transcription">[ǽktiv]</div>
-            <div class="translate">активный</div>
-            <audio src='../../server/files/05_0081.mp3' controls></audio>
-          </div>
-          <div class="word-example">
-            <div>It is important to be <b>active</b> and not sit around all the time.</div>
-            <div>Важно быть активным, а не сидеть без дела все время.</div>
-            <audio src='../../server/files/05_0081_example.mp3' controls></audio>
-          </div>
-          <div class="word-example">
-          <div>When someone is <b>active</b>, they move a lot or have a lot of things to do.</div>
-          <div>Когда кто-то активен, он много двигается или у него много дел</div>
-          <audio src='../../server/files/05_0081_meaning.mp3' controls></audio>
-        </div>
-        </div>
+    <div id="dictionary-show" class="button">
+      <p> Начать изучение слов</p>
+    </div>
+    <div id="to-edit-page" class="button">
+      <p> Редактирование словаря </p>
+    </div>
+    <div id="to-home-page" class="button hide">
+      <p>Перейти на главную страницу</p>
+    </div>
+  </header>
+
+  <main class="main">
+    <div id="home-page">
+      <div class="description">
+        Вы найдете наиболее распространенные английские слова с переводом на русский язык и сможете изучить их
       </div>
+      <div class="capabilities">Что мы предлагаем</div>
+      <ul>
+        <li>
+          <div class="square"></div>
+          Коллекция словаря содержит 3600 часто употребляемых английских слов
+        </li>
+        <li>
+          <div class="square"></div>
+          Удобный поиск слов: при вводе поискового запроса на странице остаются только слова, в которых есть указанные
+          буквы
+        </li>
+        <li>
+          <div class="square"></div>
+          При выборе слова появляется карточка слова, которая содержит:
+          <ul>
+            <li>транскрипцию, перевод;</li>
+            <li>картинку-ассоциацию;</li>
+            <li>объяснение значения слова;</li>
+            <li>пример использования слова;</li>
+            <li>аудио для прослушивания слова и предложений.</li>
+          </ul>
+        </li>
+        <div class="card-word">
+          <div>
+            <img src='../../server/files/05_0081.jpg' class="img-word">
+          </div>
+          <div>
+            <div class="word-translate">
+              <h2>active</h2>
+              <div class="transcription">[ǽktiv]</div>
+              <div class="translate">активный</div>
+              <audio src='../../server/files/05_0081.mp3' controls></audio>
+            </div>
+            <div class="word-example">
+              <div>It is important to be <b>active</b> and not sit around all the time.</div>
+              <div>Важно быть активным, а не сидеть без дела все время.</div>
+              <audio src='../../server/files/05_0081_example.mp3' controls></audio>
+            </div>
+            <div class="word-example">
+              <div>When someone is <b>active</b>, they move a lot or have a lot of things to do.</div>
+              <div>Когда кто-то активен, он много двигается или у него много дел</div>
+              <audio src='../../server/files/05_0081_meaning.mp3' controls></audio>
+            </div>
+          </div>
+        </div>
+        </ulass=>
     </div>
 
-    <div class="words" id="words"></div>
+    <div class="hide" id="dictionary-page">
+      <div class="contols-wrapper">
+        <input class="element-style" id="word-seach" type="search" name="text" required placeholder="Enter word"
+          autocomplete="off" autofocus>
+      </div>
+      <div id="card-word">
+      </div>
+      <div>
+        Результат поиска - список слов.
+      </div>
+      <div class="words" id="words"></div>
+    </div>
+
+    <div class="hide" id="edit-page">
+      
+    </div>
+
   </main>
   <footer class="footer">
     <div class="logo footer-logo"></div>
     <div class="footer-text">2022</div>
   </footer>
-  <script type="module" src="index.js">  
+  <script type="module" src="index.js">
   </script>
 </body>
 

@@ -8,12 +8,12 @@ export default class GetData {
   }
 
   async fetchDB() {
-  //  const request = await fetch('../../server/words/words.json');
-  const baseUrl = 'http://localhost:4444';
-  const request = await fetch(`${baseUrl}/words`, {
-    method:"GET",
-    headers: {"Accept": "application/json"}
-  })
+   const request = await fetch('../../server/words/words.json');
+  // const baseUrl = 'http://localhost:4444';
+  // const request = await fetch(`${baseUrl}/words`, {
+  //   method:"GET",
+  //   headers: {"Accept": "application/json"}
+  // })
   if (request.ok === true) {
     this.words = await request.json();
   }
