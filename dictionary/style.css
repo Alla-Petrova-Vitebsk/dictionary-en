@@ -188,7 +188,7 @@ flex-wrap: wrap;
   font-style: italic;
 }
 
-.edit-page {
+.edit-page-buttons {
   padding-top: 10px;
   display: flex;
   flex-direction: column;
