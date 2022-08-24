@@ -2,22 +2,24 @@ import CardWord from './cardWord.js';
 
 export default class GetData {
   constructor() {
-    this.fetchDB();
+    this.getWordsfromDB();
     this.findWords();
     this.showWord();
   }
 
-  async fetchDB() {
-   const request = await fetch('../../server/words/words.json');
-  // const baseUrl = 'http://localhost:4444';
-  // const request = await fetch(`${baseUrl}/words`, {
-  //   method:"GET",
-  //   headers: {"Accept": "application/json"}
-  // })
+  async getWordsfromDB() {
+  //  const request = await fetch('../../server/words/words.json');
+  const baseUrl = 'http://localhost:4444';
+  const request = await fetch(`${baseUrl}/words`, {
+    method:"GET",
+    headers: {"Accept": "application/json"}
+  })
   if (request.ok === true) {
     this.words = await request.json();
   }
   }
+
+
 
   findWords() {
     const seachInput = document.getElementById('word-seach');

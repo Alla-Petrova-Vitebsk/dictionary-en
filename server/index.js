@@ -16,6 +16,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/words', WordController.getAll)
+app.post('/words',WordController.add)
 
 app.listen(4444, (err) => {
 	if (err) { return console.log(err) }

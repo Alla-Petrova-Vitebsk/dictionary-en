@@ -40,7 +40,7 @@ font-weight: bold;
   text-align: center;
   background-color: darkblue;
   border-radius: 5px;
-  margin: 5px;
+  padding: 5px;
   transition: 0.5s ease-in-out;
   cursor:pointer;
 }
@@ -185,6 +185,39 @@ flex-wrap: wrap;
 .word-example{
   margin-top: 20px;
   color: #362d29;
+  font-style: italic;
+}
+
+.edit-page {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form{
+  width: 80%;
+}
+
+.form-element{
+  display: flex;
+  padding-top: 10px;
+}
+
+.form input {
+  margin-right: 0;
+}
+
+.form label {
+  margin-left: 0;
+}
+
+.required {
+  color: red;
+}
+.remark {
+  color: black;
+  font-size: 0.7rem;
   font-style: italic;
 }
 
