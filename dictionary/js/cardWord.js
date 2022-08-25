@@ -27,6 +27,7 @@ export default class CardWord {
     <div>${word.textMeaningTranslate}</div>
     <audio src='${pathToFiles}${word.audioMeaning}' controls></audio>
     </div>
+    <div> Уровень ${word.group} </div>
   </div>
   `
   }

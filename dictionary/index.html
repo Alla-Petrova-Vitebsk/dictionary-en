@@ -51,7 +51,8 @@
             <li>картинку-ассоциацию;</li>
             <li>объяснение значения слова;</li>
             <li>пример использования слова;</li>
-            <li>аудио для прослушивания слова и предложений.</li>
+            <li>аудио для прослушивания слова и предложений;</li>
+            <li>уровень сложности слова (0-5)</li>
           </ul>
         </li>
         <div class="card-word">
@@ -75,6 +76,7 @@
               <div>Когда кто-то активен, он много двигается или у него много дел</div>
               <audio src='../../server/files/05_0081_meaning.mp3' controls></audio>
             </div>
+            <div>Уровень 0</div>
           </div>
         </div>
         </ulass=>
@@ -92,6 +94,10 @@
       </div>
       <div class="words" id="words"></div>
     </div>
+
+    <div class="modal hide" id="modal">
+      <a href="#" class="close-modal" id="close-modal"></a>
+  </div>
 
     <div class="hide" id="edit-page">
       <div id="edit-page-buttons">
@@ -111,35 +117,46 @@
 
       <div class="hide" id="add-word">
         <form class="form" id="form-add-word">
-          <div class="form-element">
-            <label for="group">Введите уровень сложности слова (0-5) <span class="required">*</span></label>
-            <input type="number" id="group" min="0" max="5" value="0" required>
-          </div>
-          <div class="form-element">
-            <label for="page">Введите номер страницы для слова (0-30)<span class="required">*</span></label>
-            <input type="number" id="page" min="0" max="30" value="0" required>
-          </div>
-          <div class="form-element">
-            <label for="word">Введите слово на английском языке<span class="required">*</span></label>
-            <input type="text" id="word" max="100" pattern="[A-zА-я\s]+"
-            required autocomplete="off">
-          </div>
-          <div class="form-element">
-            <label for="transcription">Введите транскрипцию</label>
-            <input type="text" id="transcription" max="100" autocomplete="off">
-          </div>
-          <div class="form-element">
-            <label for="wordTranslate">Введите перевод на русский язык</label>
-            <input type="text" id="wordTranslate" autocomplete="off">
-          </div>
-          <div class="remark">
-            <span class="required">*</span> помечены поля обязательные для заполнения
-          </div>
-          <button type="submit" id="submit-btn-add-word">
-            <p>Добавить слово в словарь</p>
-          </button>
-
+          <fieldset>
+            <legend>Добавление нового слова в словарь</legend>
+            <div class="form-element">
+              <label for="group">Введите уровень сложности слова (0-5) <span class="required">*</span></label>
+              <input type="number" id="group" min="0" max="5" value="0" required>
+            </div>
+            <div class="form-element">
+              <label for="page">Введите номер страницы для слова (0-30)<span class="required">*</span></label>
+              <input type="number" id="page" min="0" max="30" value="0" required>
+            </div>
+            <div class="form-element">
+              <label for="word">Введите слово на английском языке<span class="required">*</span>
+              <div class="remark">(используйте только латинские символы)</div>
+              </label>
+              <input type="text" id="word" max="100" pattern="[A-z\s]+"
+              required autocomplete="off">
+            </div>
+            <div class="form-element">
+              <label for="transcription">Введите транскрипцию</label>
+              <input type="text" id="transcription" max="100" autocomplete="off">
+            </div>
+            <div class="form-element">
+              <label for="wordTranslate">Введите перевод на русский язык
+                <div class="remark">(используйте только русские символы)</div>
+              </label>
+              <input type="text" id="wordTranslate" pattern="[А-я\s]+" autocomplete="off">
+            </div>
+            <br>
+            <div class="remark">
+              <span class="required">*</span> помечены поля обязательные для заполнения
+            </div>
+            <hr>
+            <br>
+            <button type="submit" id="submit-btn-add-word">
+              <p>Добавить слово в словарь</p>
+            </button>
+          </fieldset>
+          
         </form>
+
       </div>
 
     </div>

@@ -195,6 +195,11 @@ flex-wrap: wrap;
   gap: 10px;
 }
 
+legend {
+  font-size: 0.8rem;
+  color: #000;
+}
+
 .form{
   width: 80%;
 }
@@ -220,6 +225,40 @@ flex-wrap: wrap;
   font-size: 0.7rem;
   font-style: italic;
 }
+
+.error {
+  color:red;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.valid {
+  color:black;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.modal {
+  height: 25%;
+  width: 80%;
+  margin: auto;
+  position: absolute;
+  top: 35%;
+  left:10%;
+  background-color: #d1dbe2;
+  opacity: 85%;
+  }
+
+ .modal .close-modal {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: url("./assets/svg/close.svg") no-repeat;
+    width: 25px;
+    height: 25px;
+    display: block;
+  }
+  
 
 @media (max-width:600px){
 .card-word {
