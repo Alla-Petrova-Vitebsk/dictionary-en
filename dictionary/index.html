@@ -97,7 +97,7 @@
 
     <div class="modal hide" id="modal">
       <a href="#" class="close-modal" id="close-modal"></a>
-  </div>
+    </div>
 
     <div class="hide" id="edit-page">
       <div id="edit-page-buttons">
@@ -108,7 +108,7 @@
           <div id="to-delete-word" class="button">
             <p> Удалить слово из словаря</p>
           </div>
-          <div id="to-delete-word" class="button">
+          <div id="to-edit-word" class="button">
             <p> Редактировать слово в словаре</p>
           </div>
         </div>
@@ -116,9 +116,10 @@
       </div>
 
       <div class="hide" id="add-word">
+        <h3>Добавление нового слова в словарь </h3>
         <form class="form" id="form-add-word">
           <fieldset>
-            <legend>Добавление нового слова в словарь</legend>
+            <legend>Заполните поля формы</legend>
             <div class="form-element">
               <label for="group">Введите уровень сложности слова (0-5) <span class="required">*</span></label>
               <input type="number" id="group" min="0" max="5" value="0" required>
@@ -129,10 +130,9 @@
             </div>
             <div class="form-element">
               <label for="word">Введите слово на английском языке<span class="required">*</span>
-              <div class="remark">(используйте только латинские символы)</div>
+                <div class="remark">(используйте только латинские символы)</div>
               </label>
-              <input type="text" id="word" max="100" pattern="[A-z\s]+"
-              required autocomplete="off">
+              <input type="text" id="word" max="100" pattern="[A-z\s]+" required autocomplete="off">
             </div>
             <div class="form-element">
               <label for="transcription">Введите транскрипцию</label>
@@ -154,9 +154,34 @@
               <p>Добавить слово в словарь</p>
             </button>
           </fieldset>
-          
         </form>
+        <br>
+        <div id="from-add-page" class="button small-btn">
+          <p> Выход из режима добавления </p>
+        </div>
+      </div>
 
+      <div class="hide" id="delete-word">
+        <h3>Удаление слова из словаря</h3>
+        <form class="form" id="form-delete-word">
+          <fieldset>
+            <legend>Заполните поля формы</legend>
+            <div class="form-element">
+              <label for="del-word">Введите слово на английском языке
+                <div class="remark">(используйте только латинские символы)</div>
+              </label>
+              <input type="text" id="del-word" max="100" pattern="[A-z\s]+" required autocomplete="off">
+            </div>
+            <br>
+            <button type="submit" id="submit-btn-del-word">
+              <p>Удалить слово из словаря</p>
+            </button>
+          </fieldset>
+        </form>
+        <br>
+        <div id="from-delete-page" class="button small-btn">
+          <p> Выход из режима удаления </p>
+        </div>
       </div>
 
     </div>
