@@ -3,3 +3,4 @@ import Routing from "./js/routing.js"
 
 const routing = new (Routing)
 const word = new (GetData)
+

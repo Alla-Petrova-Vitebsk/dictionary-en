@@ -1,4 +1,5 @@
 import CardWord from './cardWord.js'
+import { showModal } from './utils.js'
 
 export default class GetData {
   constructor() {
@@ -67,13 +68,13 @@ export default class GetData {
 
   //отображение карточки выбранного слова
   showCardWord(event) {
-    console.log(event)
+    // console.log(event)
     if (event.target.classList.contains('word')) {
       let wordBtn = event.target.textContent
       // let word = this.getWords(wordBtn)
       let word = this.words.filter((item) =>
         item.word.toLowerCase() === event.target.innerHTML.toLowerCase())
-      console.log(word)
+      // console.log(word)
       let cardWord = new CardWord(word[0])
     }
     this.toggleActiveWord(event)
@@ -85,28 +86,9 @@ export default class GetData {
     wordsElement.addEventListener('click', (event) => this.showCardWord(event))
   }
 
-  //отобразить окно сообщения  
-  showModal(message, style) {
-    const modal = document.getElementById('modal')
-    const closeModal = document.getElementById('close-modal')
-    const text = document.createElement('div');
-    text.className = `${style}`;
-    modal.append(text);
-    text.innerHTML = `
-  <div>
-  ${message}
-  </div> 
-  `
-    modal.classList.remove('hide')
-    closeModal.addEventListener('click', () => {
-      text.innerHTML = ''
-      modal.classList.add('hide')
-    })
-  }
 
   //запрос на сервер для добавления нового слова в базу словаря
   async addWordToDB(body) {
-    const submitBtnAddWord = document.getElementById('submit-btn-add-word')
     const response = await fetch(`${this.baseUrl}/words`, {
       method: "POST",
       headers: {
@@ -122,12 +104,11 @@ export default class GetData {
 
   //проверка существования слова в словаре
   isWordExists(word) {
-    this.getWordsfromDB()
-      let findWord = this.words.filter((item) =>
-        item.word.toLowerCase() === word.word.toLowerCase())
-      if (findWord.length !== 0) return true
-      else return false
-   }
+    let findWord = this.words.filter((item) =>
+      item.word.toLowerCase() === word.word.toLowerCase())
+    if (findWord.length !== 0) return true
+    else return false
+  }
 
   //добавление слова в словарь и проверка на существование
   async addWord() {
@@ -145,28 +126,24 @@ export default class GetData {
         transcription: transcription.value.trim(),
         wordTranslate: wordTranslate.value.trim()
       }
-       if (this.isWordExists(newWord)) {
-        this.showModal(`Слово ${newWord.word} существует!`, 'error')
+      submitBtnAddWord.disabled = true
+      if (this.isWordExists(newWord)) {
+       showModal(`Слово ${newWord.word} существует!`, 'error')
         formAddWord.reset()
-        // submitBtnAddWord.disabled = false
+        submitBtnAddWord.disabled = false
       } else {
-        // this.getWordsfromDB()
-        (async () => {
-           await this.addWordToDB(newWord)
-           this.showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
-        })()
-                // submitBtnAddWord.disabled = true
-        //todo слово не должно записываться дважды задержка? 
-
+        this.getWordsfromDB()
+        this.addWordToDB(newWord)
+       showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
         formAddWord.reset()
-
+        submitBtnAddWord.disabled = false
       }
     })
   }
 
   //запрос на сервер для удаления слова из базы словаря
   async deleteWordFromDB(word) {
-    const response = await fetch(`${this.baseUrl}/words/:${word}`, {
+    const response = await fetch(`${this.baseUrl}/words/${word}`, {
       method: "DELETE"
     })
     if (response.ok === true) {
@@ -185,18 +162,17 @@ export default class GetData {
       const delWord = {
         word: delWordInput.value.trim()
       }
-      if (!this.isWordExists(delWord)) {
-        this.showModal(`Слова ${delWord.word} не существует!`, 'error')
+      submitBtnDelWord.disabled = true
+       if (!this.isWordExists(delWord)) {
+        showModal(`Слова ${delWord.word} не существует!`, 'error')
         formDeleteWord.reset()
-        // submitBtnDelWord.disabled = false
+        submitBtnDelWord.disabled = false
       } else {
-        // this.deleteWordFromDB(delWord)
-        this.showModal(`Слово ${delWord.word} удалено из словаря!`, 'valid')
-        submitBtnDelWord.disabled = true
-        //todo задержка?
-        // this.getWordsfromDB();
+        this.getWordsfromDB()
+        this.deleteWordFromDB(delWord.word)
+        showModal(`Слово ${delWord.word} удалено из словаря!`, 'valid')
         formDeleteWord.reset()
-
+        submitBtnDelWord.disabled = false
       }
     })
   }

@@ -16,7 +16,8 @@ export default class Routing {
     this.deleteWordPage = document.getElementById('delete-word')
     this.formDeleteWord = document.getElementById('form-delete-word')
     this.fromDeletePageButton = document.getElementById('from-delete-page')
-    // this.submitBtnDelWord = document.getElementById('submit-btn-del-word')
+    this.exit = document.getElementById('exit')
+ 
 
     this.toDictionaryButton.addEventListener('click', () => this.showDictionary())
     this.toHomeButton.addEventListener('click', () => this.showHome())
@@ -25,6 +26,7 @@ export default class Routing {
     this.fromAddPageButton.addEventListener('click', () => this.fromAddPage())
     this.toDeleteWordButton.addEventListener('click', () => this.showDeleteWord())
     this.fromDeletePageButton.addEventListener('click', () => this.fromDeletePage())
+    this.exit.addEventListener('click', () => location.reload())
   }
 
   //отображение страницы поиска слов
@@ -38,6 +40,7 @@ export default class Routing {
     this.formAddWord.reset()
     this.addWordPage.classList.add('hide')
     this.editPageButtons.classList.remove('hide')
+    this.exit.classList.add("hide")
   }
 
   //отображение главной страницы
@@ -51,6 +54,7 @@ export default class Routing {
     this.formAddWord.reset()
     this.addWordPage.classList.add('hide')
     this.editPageButtons.classList.remove('hide')
+    this.exit.classList.add("hide")
   }
 
   //отображение страницы редактирования словаря
@@ -59,8 +63,8 @@ export default class Routing {
     this.dictionaryPage.classList.add("hide")
     this.editPage.classList.remove("hide")
     this.toEditPage.classList.add("hide")
-    this.toDictionaryButton.classList.remove("hide")
-    this.toHomeButton.classList.remove("hide")
+    this.toDictionaryButton.classList.add("hide")
+    this.exit.classList.remove("hide")
   }
 
   //отображение страницы добавления слова в словарь
@@ -88,6 +92,6 @@ export default class Routing {
     this.formDeleteWord.reset()
     this.deleteWordPage.classList.add('hide')
     this.editPageButtons.classList.remove('hide')
-    // this.submitBtnDelWord.disabled = false
-  }
+   }
+
 } 
