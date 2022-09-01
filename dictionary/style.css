@@ -246,6 +246,11 @@ legend {
   margin-top: 50px;
 }
 
+.confirm-text{
+  color:black;
+  text-align: center;
+}
+
 .modal {
   height: 25%;
   width: 80%;
@@ -267,6 +272,12 @@ legend {
     display: block;
   }
   
+.confirm-btn {
+  position: relative;
+  top: 100px;
+  display: flex;
+}
+
 
 @media (max-width:600px){
 .card-word {

@@ -16,9 +16,6 @@
     <div class="title">
       Англо-русский словарь
     </div>
-    <div id="exit" class="button hide">
-      <p>Выход из режима редактирования</p>
-    </div>
     <div id="dictionary-show" class="button">
       <p> Начать изучение слов</p>
     </div>
@@ -28,9 +25,13 @@
     <div id="to-home-page" class="button hide">
       <p>Перейти на главную страницу</p>
     </div>
+    <div id="exit" class="button hide">
+      <p>Выход из режима редактирования</p>
+    </div>
   </header>
 
   <main class="main">
+
     <div id="home-page">
       <div class="description">
         Вы найдете наиболее распространенные английские слова с переводом на русский язык и сможете изучить их
@@ -102,6 +103,17 @@
       <a href="#" class="close-modal" id="close-modal"></a>
     </div>
 
+    <div class="modal hide" id="confirm">
+      <div class="confirm-btn">
+        <div id="confirm-yes" class="button">
+          <p>Да</p>
+        </div>
+        <div id="confirm-no" class="button">
+          <p> Нет</p>
+        </div>
+      </div>
+    </div>
+
     <div class="hide" id="edit-page">
       <div id="edit-page-buttons">
         <div class="edit-page-buttons">
@@ -147,6 +159,11 @@
               </label>
               <input type="text" id="wordTranslate" pattern="[А-я\s]+" autocomplete="off">
             </div>
+            <div>
+              <label for="imageUpload">Выберите файл изображения</label>
+              <input type="file" id="imageUpload" accept="image/*">
+              <img id="img-preview" src="" width="30">
+            </div>
             <br>
             <div class="remark">
               <span class="required">*</span> помечены поля обязательные для заполнения
@@ -158,6 +175,9 @@
             </button>
           </fieldset>
         </form>
+
+
+
         <br>
         <div id="from-add-page" class="button small-btn">
           <p> Выход из режима добавления </p>

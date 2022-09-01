@@ -110,6 +110,34 @@ export default class GetData {
     else return false
   }
 
+  //предпросмотр загружаемого изображения
+  imagePreview(file) {
+    const fileReader = new FileReader()
+    fileReader.onload = (e) => {
+      const url = fileReader.result
+      const previewImg = document.getElementById('img-preview')
+      previewImg.src = url
+    }
+    fileReader.readAsDataURL(file)
+  }
+
+  //запрос на запись файла на сервер
+  async handleFileUpload(e) {
+    const files = e.target.files
+    const file = files[0]
+    if (file.type.includes('image')) this.imagePreview(file)
+    const formData = new FormData()
+    formData.append('image', file)
+    const response = await fetch('http://localhost:4444/files', {
+      method: 'POST',
+      body: formData
+    })
+    if (response.ok === true) {
+      const url = await response.json()
+      return url
+    }
+  }
+
   //добавление слова в словарь и проверка на существование
   async addWord() {
     const formAddWord = document.getElementById('form-add-word')
@@ -117,8 +145,15 @@ export default class GetData {
     const group = formAddWord.querySelector('#group')
     const page = formAddWord.querySelector('#page')
     const word = formAddWord.querySelector('#word')
+    const loadImg = document.getElementById('imageUpload')
+    const previewImg = document.getElementById('img-preview')
+
+
+    loadImg.addEventListener('change', e => this.handleFileUpload(e)) //загрузка изображения на сервер
+
     formAddWord.addEventListener('submit', (event) => {
       event.preventDefault()
+
       const newWord = {
         group: group.value,
         page: page.value,
@@ -128,14 +163,16 @@ export default class GetData {
       }
       submitBtnAddWord.disabled = true
       if (this.isWordExists(newWord)) {
-       showModal(`Слово ${newWord.word} существует!`, 'error')
+        showModal(`Слово ${newWord.word} существует!`, 'error')
         formAddWord.reset()
+        previewImg.src = ''
         submitBtnAddWord.disabled = false
       } else {
         this.getWordsfromDB()
         this.addWordToDB(newWord)
-       showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
+        showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
         formAddWord.reset()
+        previewImg.src = ''
         submitBtnAddWord.disabled = false
       }
     })
@@ -157,22 +194,30 @@ export default class GetData {
     const formDeleteWord = document.getElementById('form-delete-word')
     const submitBtnDelWord = formDeleteWord.querySelector('#submit-btn-del-word')
     const delWordInput = formDeleteWord.querySelector('#del-word')
+    const resetForm = () => {
+      formDeleteWord.reset()
+      submitBtnDelWord.disabled = false
+    }
+
     formDeleteWord.addEventListener('submit', (event) => {
       event.preventDefault();
       const delWord = {
         word: delWordInput.value.trim()
       }
       submitBtnDelWord.disabled = true
-       if (!this.isWordExists(delWord)) {
+      if (!this.isWordExists(delWord)) {
         showModal(`Слова ${delWord.word} не существует!`, 'error')
-        formDeleteWord.reset()
-        submitBtnDelWord.disabled = false
+        resetForm()
       } else {
-        this.getWordsfromDB()
-        this.deleteWordFromDB(delWord.word)
-        showModal(`Слово ${delWord.word} удалено из словаря!`, 'valid')
-        formDeleteWord.reset()
-        submitBtnDelWord.disabled = false
+        const isConfirm = confirm(`Подтвердите удаление слова ${delWord.word}`)
+        if (isConfirm) {
+          this.getWordsfromDB()
+          this.deleteWordFromDB(delWord.word)
+          showModal(`Слово ${delWord.word} удалено из словаря!`, 'valid')
+          resetForm()
+        } else {
+          resetForm()
+        }
       }
     })
   }
