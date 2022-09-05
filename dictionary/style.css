@@ -214,6 +214,7 @@ legend {
 
 .form-element{
   display: flex;
+  flex-wrap: wrap;
   padding-top: 10px;
 }
 
@@ -222,7 +223,36 @@ legend {
 }
 
 .form label {
-  margin-left: 0;
+  margin: 10px auto;
+}
+
+.input-files img {
+  width: 30px;
+  object-fit: contain;
+}
+
+.input-label{
+  width: 200px;
+  text-align: center;
+  color: white;
+  background-color: darkblue;
+  border-radius: 5px;
+  padding: 5px;
+  transition: 0.5s ease-in-out;
+  font-size: 0.8rem;
+  cursor:pointer;
+}
+
+.input-label:hover{
+  background-color: #e6ffc6;
+  color: darkblue;
+}
+
+.input-filename{
+width: max-content;
+padding-top: 10px;
+font-style:italic;
+font-size: 0.7rem;
 }
 
 .required {

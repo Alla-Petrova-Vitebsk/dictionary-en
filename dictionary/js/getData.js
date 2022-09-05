@@ -68,13 +68,10 @@ export default class GetData {
 
   //отображение карточки выбранного слова
   showCardWord(event) {
-    // console.log(event)
     if (event.target.classList.contains('word')) {
       let wordBtn = event.target.textContent
-      // let word = this.getWords(wordBtn)
       let word = this.words.filter((item) =>
         item.word.toLowerCase() === event.target.innerHTML.toLowerCase())
-      // console.log(word)
       let cardWord = new CardWord(word[0])
     }
     this.toggleActiveWord(event)
@@ -110,22 +107,21 @@ export default class GetData {
     else return false
   }
 
-  //предпросмотр загружаемого изображения
-  imagePreview(file) {
+  //предпросмотр загружаемого файла
+  filePreview(file, previewDOM) {
     const fileReader = new FileReader()
     fileReader.onload = (e) => {
       const url = fileReader.result
-      const previewImg = document.getElementById('img-preview')
-      previewImg.src = url
+      previewDOM.src = url
     }
     fileReader.readAsDataURL(file)
   }
 
   //запрос на запись файла на сервер
-  async handleFileUpload(e) {
+  async handleFileUpload(e, preview, fileName) {
     const files = e.target.files
     const file = files[0]
-    if (file.type.includes('image')) this.imagePreview(file)
+    this.filePreview(file, preview)
     const formData = new FormData()
     formData.append('image', file)
     const response = await fetch('http://localhost:4444/files', {
@@ -134,7 +130,7 @@ export default class GetData {
     })
     if (response.ok === true) {
       const url = await response.json()
-      return url
+      fileName.textContent = file.name
     }
   }
 
@@ -145,35 +141,77 @@ export default class GetData {
     const group = formAddWord.querySelector('#group')
     const page = formAddWord.querySelector('#page')
     const word = formAddWord.querySelector('#word')
+    const textExample = formAddWord.querySelector('#textExample')
+    const textExampleTranslate = formAddWord.querySelector('#textExampleTranslate')
+    const textMeaningTranslate = formAddWord.querySelector('#textExampleTranslate')
+
     const loadImg = document.getElementById('imageUpload')
     const previewImg = document.getElementById('img-preview')
+    const imgFileName = document.getElementById("img-file-name")
 
+    const loadAudio = document.getElementById('audioUpload')
+    const previewAudio = document.getElementById('audio-preview')
+    const audioFileName = document.getElementById('audio-file-name')
 
-    loadImg.addEventListener('change', e => this.handleFileUpload(e)) //загрузка изображения на сервер
+    const loadAudioExample = document.getElementById('audioExampleUpload')
+    const previewAudioExample = document.getElementById('audioExample-preview')
+    const audioExampleFileName = document.getElementById('audioExample-file-name')
 
+    const loadAudioMeaning = document.getElementById('audioMeaningUpload')
+    const previewAudioMeaning = document.getElementById('audioMeaning-preview')
+    const audioMeaningFileName = document.getElementById('audioMeaning-file-name')
+
+    loadImg.addEventListener('change', e => this.handleFileUpload(e, previewImg, imgFileName)) //выбор изображения
+    loadAudio.addEventListener('change', e => this.handleFileUpload(e, previewAudio, audioFileName))
+    loadAudioExample.addEventListener('change', e => this.handleFileUpload(e, previewAudioExample, audioExampleFileName))
+    loadAudioMeaning.addEventListener('change', e => this.handleFileUpload(e, previewAudioMeaning, audioMeaningFileName))
+
+    //Нажатие кнопки Отправить (запись слова в базу)
     formAddWord.addEventListener('submit', (event) => {
       event.preventDefault()
+      const imageUrl = `files/${imgFileName.textContent}`
+      const audioUrl = `files/${audioFileName.textContent}`
+      const audioExampleUrl = `files/${audioExampleFileName.textContent}`
+      const audioMeaningUrl = `files/${audioMeaningFileName.textContent}`
+
+      const clearform = () => {
+        formAddWord.reset()
+        previewImg.src = ''
+        previewAudio.src = ''
+        previewAudioExample.src = ''
+        previewAudioMeaning.src = ''
+        imgFileName.textContent = 'Файл не выбран'
+        audioFileName.textContent = 'Файл не выбран'
+        audioExampleFileName.textContent = 'Файл не выбран'
+        audioMeaningFileName.textContent = 'Файл не выбран'
+        submitBtnAddWord.disabled = false
+      }
 
       const newWord = {
         group: group.value,
         page: page.value,
         word: word.value.trim(),
         transcription: transcription.value.trim(),
-        wordTranslate: wordTranslate.value.trim()
+        wordTranslate: wordTranslate.value.trim(),
+        image: imageUrl,
+        audio: audioUrl,
+        textExample: textExample.value.trim(),
+        textExampleTranslate: textExampleTranslate.value.trim(),
+        audioExample: audioExampleUrl,
+        textMeaning: textMeaning.value.trim(),
+        textMeaningTranslate: textMeaningTranslate.value.trim(),
+        audioMeaning: audioMeaningUrl
       }
+
       submitBtnAddWord.disabled = true
       if (this.isWordExists(newWord)) {
         showModal(`Слово ${newWord.word} существует!`, 'error')
-        formAddWord.reset()
-        previewImg.src = ''
-        submitBtnAddWord.disabled = false
+        clearform()
       } else {
         this.getWordsfromDB()
         this.addWordToDB(newWord)
         showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
-        formAddWord.reset()
-        previewImg.src = ''
-        submitBtnAddWord.disabled = false
+        clearform()
       }
     })
   }
