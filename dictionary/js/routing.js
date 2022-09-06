@@ -24,10 +24,11 @@ this.toDeleteWordButton = document.getElementById('to-delete-word')
     this.fromDeletePageButton = document.getElementById('from-delete-page')
 //элементы страницы обновления
 this.toEditWordButton = document.getElementById('to-edit-word')
-
 this.updateWordPage = document.getElementById('update-word')
 this.fromUpdatePageButton = document.getElementById('from-update-page')
 this.formFindWord = document.getElementById('form-find-word')
+this.formWordUpdate = document.getElementById('form-word-update')
+this.submitBtnFindWord = document.getElementById('submit-btn-find-word')
 
     this.exit = document.getElementById('exit')
  
@@ -125,5 +126,8 @@ this.formFindWord = document.getElementById('form-find-word')
     this.formFindWord.reset()
     this.updateWordPage.classList.add("hide")
     this.editPageButtons.classList.remove('hide')
+    this.formWordUpdate.reset()
+    this.submitBtnFindWord.disabled=false 
+    this.formWordUpdate.classList.add("hide")
    }
 } 

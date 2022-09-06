@@ -147,7 +147,7 @@ export default class GetData {
     const word = formAddWord.querySelector('#word')
     const textExample = formAddWord.querySelector('#textExample')
     const textExampleTranslate = formAddWord.querySelector('#textExampleTranslate')
-    const textMeaningTranslate = formAddWord.querySelector('#textExampleTranslate')
+    const textMeaningTranslate = formAddWord.querySelector('#textMeaningTranslate')
 
     const loadImg = document.getElementById('imageUpload')
     const previewImg = document.getElementById('img-preview')
@@ -289,22 +289,41 @@ export default class GetData {
 }
 
 
+//
+showWordinForm(formAddWord,word) {
+  const group = formAddWord.querySelector('#group-update')
+  const page = formAddWord.querySelector('#page-update')
+  const textExample = formAddWord.querySelector('#textExample-update')
+  const textExampleTranslate = formAddWord.querySelector('#textExampleTranslate-update')
+  const textMeaningTranslate = formAddWord.querySelector('#textMeaningTranslate-update')
+
+  group.value = word.group
+  page.value = word.page
+  textExample.value = word.textExample
+  textExampleTranslate.value=word.textExampleTranslate
+  textMeaningTranslate.value=word.textMeaningTranslate
+}
+
+
+
  //обновление слова в словаре
  async updateWord() {
   const formFindWord = document.getElementById('form-find-word')
   const submitBtnFindWord = formFindWord.querySelector('#submit-btn-find-word')
   const findWordInput = formFindWord.querySelector('#find-word')
+ 
   const resetForm = () => {
     formFindWord.reset()
     submitBtnFindWord.disabled = false
   }
+ 
   formFindWord.addEventListener('submit', (event) => {
     event.preventDefault()
 
-    const findWord = {
-      word: findWordInput.value.trim()
-    }
+    const findWord = {word: findWordInput.value.trim()}
+
     console.log (findWord)
+    
     submitBtnFindWord.disabled = true
     if (!this.isWordExists(findWord)) {
       showModal(`Слова ${findWord.word} не существует!`, 'error')
@@ -312,6 +331,9 @@ export default class GetData {
     } else {
       let editWord = this.getWord(findWord)[0]
       console.log(editWord)
+      const formWordUpdate = document.getElementById('form-word-update')
+      formWordUpdate.classList.remove('hide')
+      this.showWordinForm(formWordUpdate,editWord)
     }
   })
 }
