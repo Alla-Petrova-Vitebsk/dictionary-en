@@ -69,7 +69,6 @@ export default class GetData {
   //отображение карточки выбранного слова
   showCardWord(event) {
     if (event.target.classList.contains('word')) {
-      let wordBtn = event.target.textContent
       let word = this.words.filter((item) =>
         item.word.toLowerCase() === event.target.innerHTML.toLowerCase())
       let cardWord = new CardWord(word[0])
@@ -79,8 +78,12 @@ export default class GetData {
 
   //при щелчке по слову - отобразить карточку
   showWord() {
+    const cardWord = document.getElementById('card-word')
     const wordsElement = document.getElementById('words')
-    wordsElement.addEventListener('click', (event) => this.showCardWord(event))
+    wordsElement.addEventListener('click', (event) => {
+      this.showCardWord(event)
+      cardWord.scrollIntoView({ block: "center", behavior: "smooth" })
+    })
   }
 
 
@@ -213,6 +216,7 @@ export default class GetData {
         showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
         clearform()
       }
+      formAddWord.scrollIntoView({block:"start",behavior:"smooth"})
     })
   }
 
