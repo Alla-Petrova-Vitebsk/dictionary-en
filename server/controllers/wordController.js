@@ -54,4 +54,31 @@ export const remove = async (req, res) => {
 }
 
 
+//изменение (обновление) слова
+export const update = async (req, res) => {
+	try {
+		const word = req.params.word
+		await WordModel.updateOne(
+			{ word: word },
+			{
+				group: req.body.group,
+				page: req.body.page,
+				image: req.body.image,
+				audio: req.body.audio,
+				audioMeaning: req.body.audioMeaning,
+				audioExample: req.body.audioExample,
+				textMeaning: req.body.textMeaning,
+				textExample: req.body.textExample,
+				transcription: req.body.transcription,
+				wordTranslate: req.body.wordTranslate,
+				textMeaningTranslate: req.body.textMeaningTranslate,
+				textExampleTranslate: req.body.textExampleTranslate
+			})
+		res.json({ success: true })
+	} catch (err) {
+		res.status(500).json({ message: "Не удается обновить слово" })
+	}
+}
+
+
 

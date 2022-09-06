@@ -9,6 +9,7 @@ export default class GetData {
     this.showWord()
     this.addWord()
     this.delWord()
+    this.updateWord()
   }
 
   //запрос на сервер для получения всех слов из базы словаря
@@ -263,5 +264,57 @@ export default class GetData {
       }
     })
   }
+
+   //запрос на сервер для добавления нового слова в базу словаря
+   async addWordToDB(body) {
+    const response = await fetch(`${this.baseUrl}/words`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    if (response.ok === true) {
+      const newWord = await response.json()
+      return newWord
+    }
+  }
+
+ //
+ getWord(word) {
+  let findWord = this.words.filter((item) =>
+    item.word.toLowerCase() === word.word.toLowerCase())
+  if (findWord.length !== 0) return findWord
+  else return {}
+}
+
+
+ //обновление слова в словаре
+ async updateWord() {
+  const formFindWord = document.getElementById('form-find-word')
+  const submitBtnFindWord = formFindWord.querySelector('#submit-btn-find-word')
+  const findWordInput = formFindWord.querySelector('#find-word')
+  const resetForm = () => {
+    formFindWord.reset()
+    submitBtnFindWord.disabled = false
+  }
+  formFindWord.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const findWord = {
+      word: findWordInput.value.trim()
+    }
+    console.log (findWord)
+    submitBtnFindWord.disabled = true
+    if (!this.isWordExists(findWord)) {
+      showModal(`Слова ${findWord.word} не существует!`, 'error')
+      resetForm()
+    } else {
+      let editWord = this.getWord(findWord)[0]
+      console.log(editWord)
+    }
+  })
+}
+
 
 }

@@ -37,6 +37,7 @@ app.post('/files',files.single('image'),
 app.get('/words', WordController.getAll)
 app.post('/words',WordController.add)
 app.delete('/words/:word',WordController.remove)
+app.patch('/words/:word',WordController.update)
 
 app.listen(4444, (err) => {
 	if (err) { return console.log(err) }
