@@ -145,8 +145,11 @@ export default class GetData {
     const group = formAddWord.querySelector('#group')
     const page = formAddWord.querySelector('#page')
     const word = formAddWord.querySelector('#word')
+    const transcription = formAddWord.querySelector('#transcription')
+    const wordTranslate = formAddWord.querySelector('#wordTranslate')
     const textExample = formAddWord.querySelector('#textExample')
     const textExampleTranslate = formAddWord.querySelector('#textExampleTranslate')
+    const textMeaning = formAddWord.querySelector('#textMeaning')
     const textMeaningTranslate = formAddWord.querySelector('#textMeaningTranslate')
 
     const loadImg = document.getElementById('imageUpload')
@@ -217,7 +220,7 @@ export default class GetData {
         showModal(`Слово ${newWord.word} добавлено в словарь!`, 'valid')
         clearform()
       }
-      formAddWord.scrollIntoView({block:"start",behavior:"smooth"})
+      formAddWord.scrollIntoView({ block: "start", behavior: "smooth" })
     })
   }
 
@@ -241,7 +244,6 @@ export default class GetData {
       formDeleteWord.reset()
       submitBtnDelWord.disabled = false
     }
-
     formDeleteWord.addEventListener('submit', (event) => {
       event.preventDefault();
       const delWord = {
@@ -265,78 +267,142 @@ export default class GetData {
     })
   }
 
-   //запрос на сервер для добавления нового слова в базу словаря
-   async addWordToDB(body) {
-    const response = await fetch(`${this.baseUrl}/words`, {
-      method: "POST",
+  //запрос на сервер для обновления слова в базе словаря
+  async updateWordInDB(word, body) {
+    const response = await fetch(`${this.baseUrl}/words/${word}`, {
+      method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     })
     if (response.ok === true) {
-      const newWord = await response.json()
-      return newWord
+      const editWord = await response.json()
+      return editWord
     }
   }
 
- //
- getWord(word) {
-  let findWord = this.words.filter((item) =>
-    item.word.toLowerCase() === word.word.toLowerCase())
-  if (findWord.length !== 0) return findWord
-  else return {}
-}
-
-
-//
-showWordinForm(formAddWord,word) {
-  const group = formAddWord.querySelector('#group-update')
-  const page = formAddWord.querySelector('#page-update')
-  const textExample = formAddWord.querySelector('#textExample-update')
-  const textExampleTranslate = formAddWord.querySelector('#textExampleTranslate-update')
-  const textMeaningTranslate = formAddWord.querySelector('#textMeaningTranslate-update')
-
-  group.value = word.group
-  page.value = word.page
-  textExample.value = word.textExample
-  textExampleTranslate.value=word.textExampleTranslate
-  textMeaningTranslate.value=word.textMeaningTranslate
-}
-
-
-
- //обновление слова в словаре
- async updateWord() {
-  const formFindWord = document.getElementById('form-find-word')
-  const submitBtnFindWord = formFindWord.querySelector('#submit-btn-find-word')
-  const findWordInput = formFindWord.querySelector('#find-word')
- 
-  const resetForm = () => {
-    formFindWord.reset()
-    submitBtnFindWord.disabled = false
+  //найти слово (точное соответствие)
+  getWord(word) {
+    let findWord = this.words.filter((item) =>
+      item.word.toLowerCase() === word.word.toLowerCase())
+    if (findWord.length !== 0) return findWord
+    else return {}
   }
- 
-  formFindWord.addEventListener('submit', (event) => {
-    event.preventDefault()
 
-    const findWord = {word: findWordInput.value.trim()}
+  //Отобразить форму с данными найденного слова
+  showWordInForm(formAddWord, word) {
+    const pathToFiles = '../../server/'
+    const formElements = {
+      group: formAddWord.querySelector('#group-update'),
+      page: formAddWord.querySelector('#page-update'),
+      transcription: formAddWord.querySelector('#transcription-update'),
+      wordTranslate: formAddWord.querySelector('#wordTranslate-update'),
+      textExample: formAddWord.querySelector('#textExample-update'),
+      textExampleTranslate: formAddWord.querySelector('#textExampleTranslate-update'),
+      textMeaning: formAddWord.querySelector('#textMeaning-update'),
+      textMeaningTranslate: formAddWord.querySelector('#textMeaningTranslate-update'),
 
-    console.log (findWord)
+      loadImg: document.getElementById('imageUpload-update'),
+      previewImg: document.getElementById('img-preview-update'),
+      imgFileName: document.getElementById("img-file-name-update"),
+
+      loadAudio: document.getElementById('audioUpload-update'),
+      previewAudio: document.getElementById('audio-preview-update'),
+      audioFileName: document.getElementById('audio-file-name-update'),
+
+      loadAudioExample: document.getElementById('audioExampleUpload-update'),
+      previewAudioExample: document.getElementById('audioExample-preview-update'),
+      audioExampleFileName: document.getElementById('audioExample-file-name-update'),
+
+      loadAudioMeaning: document.getElementById('audioMeaningUpload-update'),
+      previewAudioMeaning: document.getElementById('audioMeaning-preview-update'),
+      audioMeaningFileName: document.getElementById('audioMeaning-file-name-update')
+
+    }
+    formElements.group.value = word.group
+    formElements.page.value = word.page
+    formElements.transcription.value = word.transcription
+    formElements.wordTranslate.value = word.wordTranslate
+    formElements.textExample.value = word.textExample
+    formElements.textExampleTranslate.value = word.textExampleTranslate
+    formElements.textMeaning.value = word.textMeaning
+    formElements.textMeaningTranslate.value = word.textMeaningTranslate
     
-    submitBtnFindWord.disabled = true
-    if (!this.isWordExists(findWord)) {
-      showModal(`Слова ${findWord.word} не существует!`, 'error')
-      resetForm()
-    } else {
-      let editWord = this.getWord(findWord)[0]
-      console.log(editWord)
-      const formWordUpdate = document.getElementById('form-word-update')
-      formWordUpdate.classList.remove('hide')
-      this.showWordinForm(formWordUpdate,editWord)
-    }
-  })
-}
+    formElements.previewImg.src = `${pathToFiles}${word.image}`
+    formElements.imgFileName.textContent = word.image
+    formElements.previewAudio.src =`${pathToFiles}${word.audio}`
+    formElements.audioFileName.textContent = word.audio
+    formElements.previewAudioExample.src =`${pathToFiles}${word.audioExample}`
+    formElements.audioExampleFileName.textContent = word.audioExample
+    formElements.previewAudioMeaning.src =`${pathToFiles}${word.audioMeaning}`
+    formElements.audioMeaningFileName.textContent = word.audioMeaning
 
+    formElements.loadImg.addEventListener('change', e => this.handleFileUpload(e, formElements.previewImg, formElements.imgFileName)) //выбор изображения
+    formElements.loadAudio.addEventListener('change', e => this.handleFileUpload(e, formElements.previewAudio, formElements.audioFileName))
+    formElements.loadAudioExample.addEventListener('change', e => this.handleFileUpload(e, formElements.previewAudioExample, formElements.audioExampleFileName))
+    formElements.loadAudioMeaning.addEventListener('change', e => this.handleFileUpload(e, formElements.previewAudioMeaning, formElements.audioMeaningFileName))
+
+    return formElements
+  }
+
+  //обновление слова в словаре
+  async updateWord() {
+    const formFindWord = document.getElementById('form-find-word')
+    const submitBtnFindWord = formFindWord.querySelector('#submit-btn-find-word')
+    const findWordInput = formFindWord.querySelector('#find-word')
+
+    const resetFormFind = () => {
+      formFindWord.reset()
+      submitBtnFindWord.disabled = false
+    }
+
+    formFindWord.addEventListener('submit', (event) => {
+      event.preventDefault()
+      const findWord = { word: findWordInput.value.trim() }
+      submitBtnFindWord.disabled = true
+
+      if (!this.isWordExists(findWord)) {
+        showModal(`Слова ${findWord.word} не существует!`, 'error')
+        resetFormFind()
+      } else {
+        findWordInput.disabled = true
+        let editWord = this.getWord(findWord)[0]
+
+        console.log(editWord)
+        
+        const formWordUpdate = document.getElementById('form-word-update')
+
+        formWordUpdate.classList.remove('hide')
+        
+        let formElements = this.showWordInForm(formWordUpdate, editWord)
+        //Нажатие кнопки Отправить (запись слова в базу)
+        
+        formWordUpdate.addEventListener('submit', (event) => {
+          event.preventDefault()
+          const updateWord = {
+            group: formElements.group.value,
+            page: formElements.page.value,
+            transcription: formElements.transcription.value.trim(),
+            wordTranslate: formElements.wordTranslate.value.trim(),
+            image: `files/${formElements.imgFileName.textContent}`,
+            // // audio: audioUrl,
+            textExample: formElements.textExample.value.trim(),
+            textExampleTranslate: formElements.textExampleTranslate.value.trim(),
+            // // audioExample: audioExampleUrl,
+            textMeaning: formElements.textMeaning.value.trim(),
+            textMeaningTranslate: formElements.textMeaningTranslate.value.trim(),
+            // // audioMeaning: audioMeaningUrl
+          }
+
+          console.log(updateWord)
+          
+          this.updateWordInDB(editWord.word, updateWord)
+          showModal(`Слово ${editWord.word} обновлено в словаре!`, 'valid')
+          formFindWord.scrollIntoView({ block: "start", behavior: "smooth" })
+        })
+      }
+    })
+  }
 
 }

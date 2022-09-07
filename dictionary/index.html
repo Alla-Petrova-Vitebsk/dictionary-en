@@ -155,7 +155,7 @@
             <div class="form-element">
               <label class="input-label" for="imageUpload">Выберите файл изображения</label>
               <input type="file" id="imageUpload" accept="image/*" style="display:none">
-              <img id="img-preview" src="">
+              <img class="img-preview" id="img-preview" src="">
               <div class="input-filename" id="img-file-name">Файл не выбран</div>
             </div>
             <hr>
@@ -168,9 +168,9 @@
             <hr>
             <div class="form-element">
               <label for="textExample">Введите пример использования слова на английском языке
-                <div class="remark">(используйте только латинские символы)</div>
+                <div class="remark">(используйте латинские символы)</div>
               </label>
-              <input type="text" id="textExample" pattern="[A-z\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textExample" pattern="[A-z\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
@@ -183,16 +183,16 @@
             <hr>
             <div class="form-element">
               <label for="textExampleTranslate">Введите перевод примера использования слова
-                <div class="remark">(используйте только русские символы)</div>
+                <div class="remark">(используйте русские символы)</div>
               </label>
-              <input type="text" id="textExampleTranslate" pattern="[А-я\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textExampleTranslate" pattern="[А-я\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
               <label for="textMeaning">Введите объяснение значения слова на английском языке
-                <div class="remark">(используйте только латинские символы)</div>
+                <div class="remark">(используйте латинские символы)</div>
               </label>
-              <input type="text" id="textMeaning" pattern="[A-z\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textMeaning" pattern="[A-z\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
@@ -205,9 +205,9 @@
             <hr>
             <div class="form-element">
               <label for="textMeaningTranslate">Введите перевод объяснения значения слова
-                <div class="remark">(используйте только русские символы)</div>
+                <div class="remark">(используйте русские символы)</div>
               </label>
-              <input type="text" id="textMeaningTranslate" pattern="[А-я\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textMeaningTranslate" pattern="[А-я\s\D]+" autocomplete="off">
             </div>
             <hr>
             <br>
@@ -281,13 +281,6 @@
               <input type="number" id="page-update" min="0" max="30" value="0" required>
             </div>
             <hr>
-            <!-- <div class="form-element">
-              <label for="word">Введите слово на английском языке<span class="required">*</span>
-                <div class="remark">(используйте только латинские символы)</div>
-              </label>
-              <input type="text" id="word" max="100" pattern="[A-z\s]+" required autocomplete="off">
-            </div>
-            <hr> -->
             <div class="form-element">
               <label for="transcription-update">Введите транскрипцию</label>
               <input type="text" id="transcription-update" max="100" autocomplete="off">
@@ -303,22 +296,22 @@
             <div class="form-element">
               <label class="input-label" for="imageUpload-update">Выберите файл изображения</label>
               <input type="file" id="imageUpload-update" accept="image/*" style="display:none">
-              <img id="img-preview-update" src="">
+              <img class= "img-preview" id="img-preview-update" src="">
               <div class="input-filename" id="img-file-name-update">Файл не выбран</div>
             </div>
             <hr>
             <div class="form-element">
               <label class="input-label" for="audioUpload-update">Выберите аудио файл для прослушивания слова (mp3)</label>
-              <input type="file" id="-update" accept=".mp3" style="display:none">
+              <input type="file" id="audioUpload-update" accept=".mp3" style="display:none">
               <audio id="audio-preview-update" src="" controls> </audio>
               <div class="input-filename" id="audio-file-name-update">Файл не выбран</div>
             </div>
             <hr>
             <div class="form-element">
               <label for="textExample-update">Введите пример использования слова на английском языке
-                <div class="remark">(используйте только латинские символы)</div>
+                <div class="remark">(используйте латинские символы)</div>
               </label>
-              <input type="text" id="textExample-update" pattern="[A-z\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textExample-update" pattern="[A-z\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
@@ -331,16 +324,16 @@
             <hr>
             <div class="form-element">
               <label for="textExampleTranslate-update">Введите перевод примера использования слова
-                <div class="remark">(используйте только русские символы)</div>
+                <div class="remark">(используйте русские символы)</div>
               </label>
-              <input type="text" id="textExampleTranslate-update" pattern="[А-я\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textExampleTranslate-update" pattern="[А-я\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
               <label for="textMeaning-update">Введите объяснение значения слова на английском языке
-                <div class="remark">(используйте только латинские символы)</div>
+                <div class="remark">(используйте латинские символы)</div>
               </label>
-              <input type="text" id="textMeaning-update" pattern="[A-z\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textMeaning-update" pattern="[A-z\s\D]+" autocomplete="off">
             </div>
             <hr>
             <div class="form-element">
@@ -353,16 +346,12 @@
             <hr>
             <div class="form-element">
               <label for="textMeaningTranslate-update">Введите перевод объяснения значения слова
-                <div class="remark">(используйте только русские символы)</div>
+                <div class="remark">(используйте русские символы)</div>
               </label>
-              <input type="text" id="textMeaningTranslate-update" pattern="[А-я\s]+" autocomplete="off">
+              <input class="input-long" type="text" id="textMeaningTranslate-update" pattern="[А-я\s\D]+" autocomplete="off">
             </div>
             <hr>
             <br>
-            <!-- <div class="remark">
-              <span class="required">*</span> помечены поля обязательные для заполнения
-            </div>
-            <br> -->
             <button type="submit" id="submit-btn-update-word">
               <p>Обновить данные слова в словаре</p>
             </button>

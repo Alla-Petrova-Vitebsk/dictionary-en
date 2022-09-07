@@ -29,6 +29,7 @@ this.fromUpdatePageButton = document.getElementById('from-update-page')
 this.formFindWord = document.getElementById('form-find-word')
 this.formWordUpdate = document.getElementById('form-word-update')
 this.submitBtnFindWord = document.getElementById('submit-btn-find-word')
+this.findWordInput = document.querySelector('#find-word')
 
     this.exit = document.getElementById('exit')
  
@@ -128,6 +129,7 @@ this.submitBtnFindWord = document.getElementById('submit-btn-find-word')
     this.editPageButtons.classList.remove('hide')
     this.formWordUpdate.reset()
     this.submitBtnFindWord.disabled=false 
+    this.findWordInput.disabled=false
     this.formWordUpdate.classList.add("hide")
    }
 } 

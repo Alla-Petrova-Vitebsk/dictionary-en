@@ -82,7 +82,6 @@ font-weight: bold;
  background:#cbe9f8;
 }
 
-
 .hide {
   display: none;
 }
@@ -226,8 +225,8 @@ legend {
   margin: 10px auto;
 }
 
-.input-files img {
-  width: 30px;
+.img-preview {
+  width: 100px;
   object-fit: contain;
 }
 
@@ -246,6 +245,10 @@ legend {
 .input-label:hover{
   background-color: #e6ffc6;
   color: darkblue;
+}
+
+.input-long{
+  width: 100%;
 }
 
 .input-filename{
@@ -276,11 +279,6 @@ font-size: 0.7rem;
   margin-top: 50px;
 }
 
-.confirm-text{
-  color:black;
-  text-align: center;
-}
-
 .modal {
   height: 25%;
   width: 80%;
@@ -302,13 +300,6 @@ font-size: 0.7rem;
     display: block;
   }
   
-.confirm-btn {
-  position: relative;
-  top: 100px;
-  display: flex;
-}
-
-
 @media (max-width:600px){
 .card-word {
   display: block;
